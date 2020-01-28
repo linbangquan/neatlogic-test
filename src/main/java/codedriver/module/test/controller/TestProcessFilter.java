@@ -7,10 +7,14 @@ import java.util.List;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.alibaba.fastjson.JSONArray;
@@ -18,13 +22,15 @@ import com.alibaba.fastjson.JSONObject;
 
 import codedriver.framework.asynchronization.threadlocal.TenantContext;
 import codedriver.framework.asynchronization.threadlocal.UserContext;
+import codedriver.framework.common.RootComponent;
 import codedriver.framework.dao.mapper.ModuleMapper;
 import codedriver.framework.dto.ModuleVo;
 
-public class TestProcessFilter extends OncePerRequestFilter {
-
-	@Autowired
-	ModuleMapper moduleMapper;
+@RootComponent
+@WebFilter(filterName = "TestProcessFilter",
+		urlPatterns = { "/module/process/*" })
+public class TestProcessFilter extends OncePerRequestFilter implements ApplicationContextAware {
+	private static ApplicationContext applicationContext;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -61,5 +67,10 @@ public class TestProcessFilter extends OncePerRequestFilter {
 	 */
 	@Override
 	public void destroy() {
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext _applicationContext) throws BeansException {
+		applicationContext = _applicationContext;
 	}
 }
