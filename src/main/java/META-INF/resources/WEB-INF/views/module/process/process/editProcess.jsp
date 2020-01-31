@@ -114,9 +114,9 @@
 							attr.handlerName = $('.hidProcessAttributeHandlerName', $(this)).val();
 							attributes.push(attr);
 						});
-						Paper.setUserData({
+						/* Paper.setUserData({
 							"attributeList" : attributes
-						});
+						}); */
 						if (attributes.length > 0) {
 							$('#spnAttributeCount').text(attributes.length);
 						} else {
@@ -411,8 +411,8 @@
 					<div>
 						<i class="fa-envelope-o fz16"></i>
 					</div>
-					<div>属性<span id="spnAttributeCount" class="font-icon fz12"> ${processVo.attributeList.size()>0?processVo.attributeList.size():''} </span>
-					</div>
+					<%-- <div>属性<span id="spnAttributeCount" class="font-icon fz12"> ${processVo.attributeList.size()>0?processVo.attributeList.size():''} </span>
+					</div> --%>
 				</div>
 				<div class="divBtnItem" id="btnForm">
 					<div>
