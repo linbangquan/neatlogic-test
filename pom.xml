@@ -85,7 +85,6 @@
 		    <artifactId>junit</artifactId>
 		    <version>4.12</version>
 		    <scope>test</scope>
-		    <!-- <scope>provided</scope> -->
 		</dependency>
 		<dependency>
 		    <groupId>mysql</groupId>

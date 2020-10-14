@@ -10,7 +10,7 @@ import codedriver.framework.dto.TeamVo;
 import codedriver.framework.dto.TenantVo;
 import codedriver.BaseTest;
 
-public class TenantMapperTest extends BaseTest{
+public class TestMapperTest extends BaseTest{
 
     @Autowired
     private TenantMapper tenantMapper;
@@ -28,6 +28,13 @@ public class TenantMapperTest extends BaseTest{
     @Test
     public void test2() {
         TeamVo team = teamMapper.getTeamByUuid("63676fb475804492a4bf509beb62340a");
+        System.out.println(team);
+    }
+    
+    @Test
+    public void test3() {
+        TenantContext.init("oppo");//切换到codedriver_oppo租户库
+        TeamVo team = teamMapper.getTeamByUuid("02b55b7818eb41d6b7710a6f0055353f");
         System.out.println(team);
     }
 }
