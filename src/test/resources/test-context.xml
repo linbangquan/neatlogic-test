@@ -10,7 +10,7 @@
 
 	<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"> 
 	<property name="location"> 
-		<value>classpath:test.properties</value> 
+		<value>classpath:config.properties</value> 
 	</property> 
 	</bean>
 	<!-- com.alibaba.druid.pool.DruidDataSource有链接溢出问题 -->
@@ -57,7 +57,7 @@
 
 	<!-- scan for mappers and let them be autowired -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="codedriver.framework.**.mapper" />
+		<property name="basePackage" value="codedriver.**.mapper" />
 	</bean>
 	<!-- 创建SqlSessionFactory，同时指定数据源 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -65,7 +65,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<list>
-				<value>classpath*:codedriver/framework/**/mapper/*.xml</value>
+				<value>classpath*:codedriver/**/mapper/**/*.xml</value>
 			</list>
 		</property>
 	</bean>
