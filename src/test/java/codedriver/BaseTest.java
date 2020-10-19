@@ -26,12 +26,10 @@ public class BaseTest {
     public static void beforeClass() {
         /** 默认租户为techsure，默认查询codedriver_techsure库，如需查询codedriver库，执行这条语句切换TenantContext.get().setUseDefaultDatasource(true); **/
         TenantContext.init("techsure");
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
     
     @AfterClass
     public static void afterClass() {
         TenantContext.get().release();
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
 }
