@@ -1,5 +1,6 @@
 package codedriver.module.knowledge.dao.mapper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -29,20 +30,20 @@ public class KnowledgeDocumentMapperTest extends BaseTest{
      */
     @Test
     public void knowledgeDocument() {
-        Long knowledgeDocumentVersionId = 12L;
-        Long knowledgeTypeId = 12L;
+        Integer version = 0;
+        String knowledgeTypeUuid = "abcedfghijklmnopqrstuvwxyz123456";
         Long knowledgeCircleId = 34L;
         String fcu = "linbq";
         KnowledgeDocumentVo insertVo = new KnowledgeDocumentVo();
-        insertVo.setKnowledgeDocumentVersionId(knowledgeDocumentVersionId);
-        insertVo.setKnowledgeTypeId(knowledgeTypeId);
+        insertVo.setVersion(0);
+        insertVo.setKnowledgeTypeUuid(knowledgeTypeUuid);
         insertVo.setKnowledgeCircleId(knowledgeCircleId);
         insertVo.setFcu(fcu);
         assert knowledgeDocumentMapper.insertKnowledgeDocument(insertVo) == 1;
         
         KnowledgeDocumentVo getVo = knowledgeDocumentMapper.getKnowledgeDocumentById(insertVo.getId());
-        assert getVo.getKnowledgeDocumentVersionId() == knowledgeDocumentVersionId;
-        assert getVo.getKnowledgeTypeId() == knowledgeTypeId;
+        assert getVo.getVersion() == version;
+        assert Objects.equals(getVo.getKnowledgeTypeUuid(), knowledgeTypeUuid);
         assert getVo.getKnowledgeCircleId() == knowledgeCircleId;
         assert getVo.getFcu().equals(fcu);
         assert getVo.getIsDelete() == 0;
@@ -50,8 +51,23 @@ public class KnowledgeDocumentMapperTest extends BaseTest{
         assert knowledgeDocumentMapper.updateKnowledgeDocumentToDeleteById(insertVo.getId()) == 1;
         
         getVo = knowledgeDocumentMapper.getKnowledgeDocumentById(insertVo.getId());
+        assert getVo.getVersion() == version;
+        assert Objects.equals(getVo.getKnowledgeTypeUuid(), knowledgeTypeUuid);
+        assert getVo.getKnowledgeCircleId() == knowledgeCircleId;
+        assert getVo.getFcu().equals(fcu);
+        assert getVo.getIsDelete() == 1;
+        
+        Long knowledgeDocumentVersionId = 1L;
+        Integer updateVersion = 1;
+        KnowledgeDocumentVo updateVo = new KnowledgeDocumentVo();
+        updateVo.setId(insertVo.getId());
+        updateVo.setKnowledgeDocumentVersionId(knowledgeDocumentVersionId);
+        updateVo.setVersion(updateVersion);
+        assert knowledgeDocumentMapper.updateKnowledgeDocumentById(updateVo) == 1;
+        getVo = knowledgeDocumentMapper.getKnowledgeDocumentById(insertVo.getId());
+        assert getVo.getVersion() == updateVersion;
         assert getVo.getKnowledgeDocumentVersionId() == knowledgeDocumentVersionId;
-        assert getVo.getKnowledgeTypeId() == knowledgeTypeId;
+        assert Objects.equals(getVo.getKnowledgeTypeUuid(), knowledgeTypeUuid);
         assert getVo.getKnowledgeCircleId() == knowledgeCircleId;
         assert getVo.getFcu().equals(fcu);
         assert getVo.getIsDelete() == 1;
@@ -101,23 +117,43 @@ public class KnowledgeDocumentMapperTest extends BaseTest{
         assert Objects.equals(getVo.getStatus(), KnowledgeDocumentVersionStatus.DRAFT.getValue());
         assert Objects.equals(getVo.getLcu(), lcu);
         assert Objects.equals(getVo.getSize(), null);
+
+        
+        Integer maxVersion = knowledgeDocumentMapper.getKnowledgeDocumentVersionMaxVerionByKnowledgeDocumentId(knowledgeDocumentId);
+        assert maxVersion == version;
         
         String updateTitle = "updateTitle";
         String updateLcu = "lvzk";
         Integer updateSize = 12345;
+        Integer updateVersion = maxVersion + 1;
+        String reviewer = "reviewer";
         updateVo.setTitle(updateTitle);
         updateVo.setStatus(KnowledgeDocumentVersionStatus.SUBMITED.getValue());
         updateVo.setLcu(updateLcu);
         updateVo.setSize(updateSize);
+        updateVo.setVersion(updateVersion);
+        updateVo.setReviewer(reviewer);
         assert knowledgeDocumentMapper.updateKnowledgeDocumentVersionById(updateVo) == 1;
         
         getVo = knowledgeDocumentMapper.getKnowledgeDocumentVersionById(insertVo.getId());
         assert Objects.equals(getVo.getTitle(), updateTitle);
         assert Objects.equals(getVo.getKnowledgeDocumentId(), knowledgeDocumentId);
-        assert Objects.equals(getVo.getVersion(), version);
+        assert Objects.equals(getVo.getVersion(), updateVersion);
         assert Objects.equals(getVo.getStatus(), KnowledgeDocumentVersionStatus.SUBMITED.getValue());
         assert Objects.equals(getVo.getLcu(), updateLcu);
         assert Objects.equals(getVo.getSize(), updateSize);
+        assert Objects.equals(getVo.getReviewer(), reviewer);
+        
+        assert knowledgeDocumentMapper.updateKnowledgeDocumentVersionStatusByKnowledgeDocumentIdAndVersionAndStatus(knowledgeDocumentId, updateVersion, KnowledgeDocumentVersionStatus.SUBMITED.getValue(), KnowledgeDocumentVersionStatus.PASSED.getValue()) == 1;
+        
+        getVo = knowledgeDocumentMapper.getKnowledgeDocumentVersionById(insertVo.getId());
+        assert Objects.equals(getVo.getTitle(), updateTitle);
+        assert Objects.equals(getVo.getKnowledgeDocumentId(), knowledgeDocumentId);
+        assert Objects.equals(getVo.getVersion(), updateVersion);
+        assert Objects.equals(getVo.getStatus(), KnowledgeDocumentVersionStatus.PASSED.getValue());
+        assert Objects.equals(getVo.getLcu(), updateLcu);
+        assert Objects.equals(getVo.getSize(), updateSize);
+        assert Objects.equals(getVo.getReviewer(), reviewer);
         
         assert knowledgeDocumentMapper.deleteKnowledgeDocumentVersionById(insertVo.getId()) == 1;
         
@@ -181,11 +217,11 @@ public class KnowledgeDocumentMapperTest extends BaseTest{
      */
     @Test
     public void knowledgeDocumentLine() {
-        String config = "{}";
+        String config = "{\"a1\":\"b1\"}";
         KnowledgeDocumentLineConfigVo insertConfitVo = new KnowledgeDocumentLineConfigVo(config);
         assert knowledgeDocumentMapper.insertKnowledgeDocumentLineConfig(insertConfitVo) == 1;
         
-        String content = "content";
+        String content = "content-linbq";
         KnowledgeDocumentLineContentVo insertContentVo = new KnowledgeDocumentLineContentVo(content);
         assert knowledgeDocumentMapper.insertKnowledgeDocumentLineContent(insertContentVo) == 1;
         
@@ -204,10 +240,24 @@ public class KnowledgeDocumentMapperTest extends BaseTest{
         insertVo.setContentHash(contentHash);
         insertVo.setConfigHash(configHash);
         insertVo.setLineNumber(lineNumber);
-        assert knowledgeDocumentMapper.insertKnowledgeDocumentLine(insertVo) == 1;
+        List<KnowledgeDocumentLineVo> insertVoList = new ArrayList<>();
+        insertVoList.add(insertVo);
+        
+        String uuid2 = "abcedfghijklmnopqrstuvwxyz123457";
+        Integer lineNumber2 = 2;
+        KnowledgeDocumentLineVo insertVo2 = new KnowledgeDocumentLineVo();
+        insertVo2.setUuid(uuid2);
+        insertVo2.setHandler(handler);
+        insertVo2.setKnowledgeDocumentId(knowledgeDocumentId);
+        insertVo2.setKnowledgeDocumentVersionId(knowledgeDocumentVersionId);
+        insertVo2.setContentHash(contentHash);
+        insertVo2.setConfigHash(configHash);
+        insertVo2.setLineNumber(lineNumber2);
+        insertVoList.add(insertVo2);
+        assert knowledgeDocumentMapper.insertKnowledgeDocumentLineList(insertVoList) == 2;
         
         List<KnowledgeDocumentLineVo> getVoList = knowledgeDocumentMapper.getKnowledgeDocumentLineListByKnowledgeDocumentVersionId(knowledgeDocumentVersionId);
-        assert getVoList.size() == 1;
+        assert getVoList.size() == 2;
         assert Objects.equals(getVoList.get(0).getUuid(), uuid);
         assert Objects.equals(getVoList.get(0).getHandler(), handler);
         assert Objects.equals(getVoList.get(0).getKnowledgeDocumentId(), knowledgeDocumentId);
@@ -218,7 +268,7 @@ public class KnowledgeDocumentMapperTest extends BaseTest{
         assert Objects.equals(getVoList.get(0).getConfigStr(), config);
         assert Objects.equals(getVoList.get(0).getLineNumber(), lineNumber);
         
-        assert knowledgeDocumentMapper.deleteKnowledgeDocumentLineByKnowledgeDocumentVersionId(knowledgeDocumentVersionId) == 1;
+        assert knowledgeDocumentMapper.deleteKnowledgeDocumentLineByKnowledgeDocumentVersionId(knowledgeDocumentVersionId) == 2;
         getVoList = knowledgeDocumentMapper.getKnowledgeDocumentLineListByKnowledgeDocumentVersionId(knowledgeDocumentVersionId);
         assert getVoList.size() == 0;
     }
@@ -229,7 +279,7 @@ public class KnowledgeDocumentMapperTest extends BaseTest{
      */
     @Test
     public void knowledgeDocumentLineConfig() {
-        String config = "{}";
+        String config = "{\"a\":\"b\"}";
         KnowledgeDocumentLineConfigVo insertConfitVo = new KnowledgeDocumentLineConfigVo(config);
         assert knowledgeDocumentMapper.insertKnowledgeDocumentLineConfig(insertConfitVo) == 1;
         assert knowledgeDocumentMapper.checkKnowledgeDocumentLineConfigHashIsExists(insertConfitVo.getHash()) == 1;
@@ -241,7 +291,7 @@ public class KnowledgeDocumentMapperTest extends BaseTest{
      */
     @Test
     public void knowledgeDocumentLineContent() {
-        String content = "content";
+        String content = "content1";
         KnowledgeDocumentLineContentVo insertContentVo = new KnowledgeDocumentLineContentVo(content);
         assert knowledgeDocumentMapper.insertKnowledgeDocumentLineContent(insertContentVo) == 1;
         assert knowledgeDocumentMapper.checkKnowledgeDocumentLineContentHashIsExists(insertContentVo.getHash()) == 1;
