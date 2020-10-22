@@ -19,7 +19,7 @@ import codedriver.module.knowledge.dto.KnowledgeDocumentTagVo;
 import codedriver.module.knowledge.dto.KnowledgeDocumentVersionVo;
 import codedriver.module.knowledge.dto.KnowledgeDocumentVo;
 
-public class KnowledgeDocumentMapperTest extends BaseTest{
+public class KnowledgeDocumentMapperTest extends BaseTest {
     
     @Autowired
     private KnowledgeDocumentMapper knowledgeDocumentMapper;
@@ -31,19 +31,19 @@ public class KnowledgeDocumentMapperTest extends BaseTest{
     @Test
     public void knowledgeDocument() {
         Integer version = 0;
-        String knowledgeTypeUuid = "abcedfghijklmnopqrstuvwxyz123456";
+        String knowledgeDocumentTypeUuid = "abcedfghijklmnopqrstuvwxyz123456";
         Long knowledgeCircleId = 34L;
         String fcu = "linbq";
         KnowledgeDocumentVo insertVo = new KnowledgeDocumentVo();
         insertVo.setVersion(0);
-        insertVo.setKnowledgeTypeUuid(knowledgeTypeUuid);
+        insertVo.setKnowledgeDocumentTypeUuid(knowledgeDocumentTypeUuid);
         insertVo.setKnowledgeCircleId(knowledgeCircleId);
         insertVo.setFcu(fcu);
         assert knowledgeDocumentMapper.insertKnowledgeDocument(insertVo) == 1;
         
         KnowledgeDocumentVo getVo = knowledgeDocumentMapper.getKnowledgeDocumentById(insertVo.getId());
         assert getVo.getVersion() == version;
-        assert Objects.equals(getVo.getKnowledgeTypeUuid(), knowledgeTypeUuid);
+        assert Objects.equals(getVo.getKnowledgeDocumentTypeUuid(), knowledgeDocumentTypeUuid);
         assert getVo.getKnowledgeCircleId() == knowledgeCircleId;
         assert getVo.getFcu().equals(fcu);
         assert getVo.getIsDelete() == 0;
@@ -52,7 +52,7 @@ public class KnowledgeDocumentMapperTest extends BaseTest{
         
         getVo = knowledgeDocumentMapper.getKnowledgeDocumentById(insertVo.getId());
         assert getVo.getVersion() == version;
-        assert Objects.equals(getVo.getKnowledgeTypeUuid(), knowledgeTypeUuid);
+        assert Objects.equals(getVo.getKnowledgeDocumentTypeUuid(), knowledgeDocumentTypeUuid);
         assert getVo.getKnowledgeCircleId() == knowledgeCircleId;
         assert getVo.getFcu().equals(fcu);
         assert getVo.getIsDelete() == 1;
@@ -67,7 +67,7 @@ public class KnowledgeDocumentMapperTest extends BaseTest{
         getVo = knowledgeDocumentMapper.getKnowledgeDocumentById(insertVo.getId());
         assert getVo.getVersion() == updateVersion;
         assert getVo.getKnowledgeDocumentVersionId() == knowledgeDocumentVersionId;
-        assert Objects.equals(getVo.getKnowledgeTypeUuid(), knowledgeTypeUuid);
+        assert Objects.equals(getVo.getKnowledgeDocumentTypeUuid(), knowledgeDocumentTypeUuid);
         assert getVo.getKnowledgeCircleId() == knowledgeCircleId;
         assert getVo.getFcu().equals(fcu);
         assert getVo.getIsDelete() == 1;
