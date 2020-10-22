@@ -1,5 +1,6 @@
 package codedriver.module.knowledge.dao.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -30,6 +31,17 @@ public class KnowledgeTagMapperTest extends BaseTest {
         String name3 = prefix + "标签3";
         KnowledgeTagVo knowledgeTagVo3 = new KnowledgeTagVo(name3);
         assert knowledgeTagMapper.insertKnowledgeTag(knowledgeTagVo3) == 1;
+
+        List<Long> idList = new ArrayList<>();
+        idList.add(knowledgeTagVo1.getId());
+        idList.add(knowledgeTagVo2.getId());
+        idList.add(knowledgeTagVo3.getId());
+        List<String> nameList = knowledgeTagMapper.getKnowledgeTagNameListByIdList(idList);
+        
+        assert nameList.size() == 3;
+        assert nameList.get(0).equals(name1);
+        assert nameList.get(1).equals(name2);
+        assert nameList.get(2).equals(name3);
         
         BasePageVo basePageVo = new BasePageVo();
         basePageVo.setKeyword(prefix);
