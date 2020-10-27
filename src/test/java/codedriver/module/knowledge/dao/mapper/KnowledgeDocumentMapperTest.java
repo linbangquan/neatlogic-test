@@ -128,7 +128,7 @@ public class KnowledgeDocumentMapperTest extends BaseTest {
         Integer updateVersion = maxVersion + 1;
         String reviewer = "reviewer";
         updateVo.setTitle(updateTitle);
-        updateVo.setStatus(KnowledgeDocumentVersionStatus.SUBMITED.getValue());
+        updateVo.setStatus(KnowledgeDocumentVersionStatus.SUBMITTED.getValue());
         updateVo.setLcu(updateLcu);
         updateVo.setSize(updateSize);
         updateVo.setVersion(updateVersion);
@@ -139,12 +139,12 @@ public class KnowledgeDocumentMapperTest extends BaseTest {
         assert Objects.equals(getVo.getTitle(), updateTitle);
         assert Objects.equals(getVo.getKnowledgeDocumentId(), knowledgeDocumentId);
         assert Objects.equals(getVo.getVersion(), updateVersion);
-        assert Objects.equals(getVo.getStatus(), KnowledgeDocumentVersionStatus.SUBMITED.getValue());
+        assert Objects.equals(getVo.getStatus(), KnowledgeDocumentVersionStatus.SUBMITTED.getValue());
         assert Objects.equals(getVo.getLcu(), updateLcu);
         assert Objects.equals(getVo.getSize(), updateSize);
         assert Objects.equals(getVo.getReviewer(), reviewer);
         
-        assert knowledgeDocumentMapper.updateKnowledgeDocumentVersionStatusByKnowledgeDocumentIdAndVersionAndStatus(knowledgeDocumentId, updateVersion, KnowledgeDocumentVersionStatus.SUBMITED.getValue(), KnowledgeDocumentVersionStatus.PASSED.getValue()) == 1;
+        assert knowledgeDocumentMapper.updateKnowledgeDocumentVersionStatusByKnowledgeDocumentIdAndVersionAndStatus(knowledgeDocumentId, updateVersion, KnowledgeDocumentVersionStatus.SUBMITTED.getValue(), KnowledgeDocumentVersionStatus.PASSED.getValue()) == 1;
         
         getVo = knowledgeDocumentMapper.getKnowledgeDocumentVersionById(insertVo.getId());
         assert Objects.equals(getVo.getTitle(), updateTitle);
