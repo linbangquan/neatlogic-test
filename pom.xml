@@ -126,7 +126,7 @@
 </dependency>
 
 		<dependency>
-			<groupId>org.apache.Tika</groupId>
+			<groupId>org.apache.tika</groupId>
 			<artifactId>Tika-parsers</artifactId>
 			<version>1.24.1</version>
 		</dependency>

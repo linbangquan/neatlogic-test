@@ -68,11 +68,11 @@ public class TikaTest {
         //detecting the file type
           BodyContentHandler handler = new BodyContentHandler();
           Metadata metadata = new Metadata();
-          FileInputStream inputstream = new FileInputStream(new File("C:\\Users\\89770\\Desktop\\desktop\\金科二期\\ITSM新需求20200107.xlsx"));
+          FileInputStream inputstream = new FileInputStream(new File("C:\\Users\\89770\\Desktop\\desktop\\金科二期\\前期需求规划\\金科二期.pptx"));
           //Text document parser
           AutoDetectParser  TexTParser = new AutoDetectParser();
           TexTParser.parse(inputstream, handler, metadata);
-          System.out.println("Contents of the document:" + handler.toString());
+          System.out.println("Contents of the document:" + handler.toString().replaceAll("\\s{2,}|\t|\n", ""));
           System.out.println("Metadata of the document:");
           String[] metadataNames = metadata.names();
           for(String name : metadataNames) {
