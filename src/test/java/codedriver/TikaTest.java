@@ -30,7 +30,7 @@ public class TikaTest {
      */
     public void typeDetection() throws IOException {
         //assume example.mp3 is in your current directory
-        File file = new File("C:\\Users\\89770\\Desktop\\desktop\\inti1.sql");//
+        File file = new File("C:\\Users\\89770\\Desktop\\desktop\\inti.sql");//测试
         //Instantiating tika facade class 
         Tika tika = new Tika();
         //detecting the file type using detect method
