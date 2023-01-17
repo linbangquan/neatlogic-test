@@ -1,16 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.techsure</groupId>
-		<artifactId>codedriver-parent</artifactId>
-		<version>[1.0.0, 2.0.0]</version>
-	</parent>
-	<artifactId>codedriver-test</artifactId>
-	<version>0.1.0.0-SNAPSHOT</version>
-	<build>
-		<resources>
+<!--
+  ~ Copyright(c) 2023 TechSure Co., Ltd. All Rights Reserved.
+  ~ 本内容仅限于深圳市赞悦科技有限公司内部传阅，禁止外泄以及用于其他的商业项目。
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.techsure</groupId>
+        <artifactId>codedriver-parent</artifactId>
+        <version>[1.0.0, 2.0.0]</version>
+    </parent>
+    <artifactId>codedriver-test</artifactId>
+    <version>0.1.0.0-SNAPSHOT</version>
+    <build>
+        <resources>
 			<resource>
 				<directory>src/main/java</directory>
 				<includes>
@@ -70,28 +74,32 @@
 		<dependency>
 			<groupId>com.techsure</groupId>
 			<artifactId>codedriver-event</artifactId>
-			<version>0.1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.techsure</groupId>
-			<artifactId>codedriver-dgbank</artifactId>
-			<version>0.1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.techsure</groupId>
-			<artifactId>codedriver-knowledge</artifactId>
-			<version>0.1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
+            <version>0.1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.techsure</groupId>
+            <artifactId>codedriver-dgbank</artifactId>
+            <version>0.1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.techsure</groupId>
+            <artifactId>codedriver-knowledge</artifactId>
+            <version>0.1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.techsure</groupId>
+            <artifactId>codedriver-cmdb</artifactId>
+            <version>0.1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
 
 
-
-		<dependency>
+        <dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.21</version>
@@ -108,30 +116,29 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency> 
-			<groupId>org.apache.xmlbeans</groupId>
-			<artifactId>xmlbeans</artifactId>
-			<version>3.1.0</version>
-		</dependency> 
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>4.1.2</version>
-		</dependency>
-<!-- https://mvnrepository.com/artifact/org.apache.poi/ooxml-schemas -->
-<dependency>
-    <groupId>org.apache.poi</groupId>
-    <artifactId>ooxml-schemas</artifactId>
-    <version>1.4</version>
-</dependency>
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/ooxml-schemas -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>ooxml-schemas</artifactId>
+            <version>1.4</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.apache.tika</groupId>
-			<artifactId>Tika-parsers</artifactId>
-			<version>1.24.1</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>Tika-parsers</artifactId>
+            <version>1.24.1</version>
+        </dependency>
 
 
-
-	</dependencies>
+    </dependencies>
 </project>
