@@ -9,87 +9,70 @@
     <parent>
         <groupId>com.techsure</groupId>
         <artifactId>codedriver-parent</artifactId>
-        <version>[1.0.0, 2.0.0]</version>
+        <version>[2.0.0, 3.0.0)</version>
     </parent>
     <artifactId>codedriver-test</artifactId>
     <version>0.1.0.0-SNAPSHOT</version>
     <build>
         <resources>
-			<resource>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>META-INF/**</include>
-				</includes>
-			</resource>
-		</resources>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	<dependencies>
-		<dependency>
-			<groupId>com.techsure</groupId>
-			<artifactId>codedriver-framework</artifactId>
-			<version>0.1.0.0-SNAPSHOT</version>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>com.techsure</groupId>
-			<artifactId>codedriver-tenant</artifactId>
-			<version>0.1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.techsure</groupId>
-			<artifactId>codedriver-globalsearch</artifactId>
-			<version>0.1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.techsure</groupId>
-			<artifactId>codedriver-dashboard</artifactId>
-			<version>0.1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.techsure</groupId>
-			<artifactId>codedriver-process</artifactId>
-			<version>0.1.0.0-SNAPSHOT</version>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>com.techsure</groupId>
-			<artifactId>codedriver-change</artifactId>
-			<version>0.1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.techsure</groupId>
-			<artifactId>codedriver-report</artifactId>
-			<version>0.1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.techsure</groupId>
-			<artifactId>codedriver-event</artifactId>
-            <version>0.1.0.0-SNAPSHOT</version>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>META-INF/**</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.techsure</groupId>
+            <artifactId>codedriver-framework</artifactId>
         </dependency>
         <dependency>
             <groupId>com.techsure</groupId>
-            <artifactId>codedriver-dgbank</artifactId>
-            <version>0.1.0.0-SNAPSHOT</version>
+            <artifactId>codedriver-tenant</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.techsure</groupId>
+            <artifactId>codedriver-dashboard</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.techsure</groupId>
+            <artifactId>codedriver-process</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.techsure</groupId>
+            <artifactId>codedriver-change</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.techsure</groupId>
+            <artifactId>codedriver-report</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.techsure</groupId>
+            <artifactId>codedriver-event</artifactId>
         </dependency>
         <dependency>
             <groupId>com.techsure</groupId>
             <artifactId>codedriver-knowledge</artifactId>
-            <version>0.1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.techsure</groupId>
+            <artifactId>codedriver-rdm</artifactId>
         </dependency>
         <dependency>
             <groupId>com.techsure</groupId>
             <artifactId>codedriver-cmdb</artifactId>
-            <version>0.1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -100,22 +83,16 @@
 
 
         <dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.21</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>4.1.2</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.xmlbeans</groupId>
-					<artifactId>xmlbeans</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.1.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.xmlbeans</groupId>
+                    <artifactId>xmlbeans</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>org.apache.xmlbeans</groupId>
             <artifactId>xmlbeans</artifactId>
