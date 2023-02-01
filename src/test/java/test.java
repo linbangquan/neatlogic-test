@@ -16,6 +16,6 @@
 
 public class test {
     public static void main(String[] a) {
-        System.out.println("test333");
+        System.out.println("test3");
     }
 }
